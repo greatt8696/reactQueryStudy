@@ -1,0 +1,44 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .example {
+    @apply bg-gray-800 w-screen h-screen;
+  }
+  .intro-x {
+    @apply translate-x-32 opacity-50 transition-all;
+  }
+  .intro-base {
+    @apply translate-x-0  opacity-100 delay-500;
+  }
+}
+@layer utilities {
+  .intro-set {
+    animation-fill-mode: forwards;
+  }
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .example {
+    @apply bg-gray-800 w-screen h-screen;
+  }
+
+  .introX {
+    @apply transition-all animate-introX intro-set;
+  }
+
+  .introY {
+    @apply transition-all animate-introY intro-set;
+  }
+}
+@layer utilities {
+  .intro-set {
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+}

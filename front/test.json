@@ -1,0 +1,21 @@
+{
+  "name": "Flow Haircut",
+  "description": "No one will believe you when you tell them you do not use any hair products to get this hairstyle.",
+  "attributes": [
+    { "trait_type": "Rarity", "value": "Rare" },
+    {
+      "trait_type": "Nftable ID",
+      "value": "a19986f3-d091-4ad3-ba8d-8c5a60f6fc0b",
+      "hidden": true
+    },
+    {
+      "trait_type": "Kind",
+      "value": "COSMETIC.mid_messy_hair",
+      "hidden": true
+    },
+    { "trait_type": "Item Type", "value": "Cosmetic" },
+    { "trait_type": "Cosmetic Slot", "value": "Head" },
+    { "trait_type": "Token Type", "value": "ITEM" }
+  ],
+  "image": "ipfs://bafybeibsf4rkp5lo5d6jhhoyslvpzndimyba3ernmy3rsljbpjmyddchk4/COSMETIC.mid_messy_hair.png"
+}
