@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getBoards, getError } from "../../hook/useQuery";
 
 const Main = () => {
+  // const boardQuery = {};
   const boardQuery = getBoards({
     onSuccess: (data) => {
       console.log("성공 : data : ", data);
@@ -22,6 +23,7 @@ const Main = () => {
     onError: (e) => {
       console.log("실패 : error : ", e);
     },
+    enabled: boardQuery.isSuccess, // 쿼리를 시작하는 조건문
   });
 
   return (
@@ -33,7 +35,7 @@ const Main = () => {
             <div className="backgroundGradient text-3xl  text-white animate-gradientLoading w-full h-full"></div>
           )}
           {<div className=" text-3xl text-white">{boardQuery?.data}</div>}
-          {errorQuery.isError && (
+          {errorQuery?.isError && (
             <div className=" text-3xl text-red-500"> 404 에러 </div>
           )}
         </div>
