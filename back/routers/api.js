@@ -1,18 +1,27 @@
-const PAGE_CONTENTS_SIZE = 50;
-
 const router = require("express").Router();
 
 router.get("/board", async (req, res) => {
-  return res.status(200).send("뀨");
+  setTimeout(() => {
+    return res.status(200).send("뀨");
+  }, 2000);
 });
-router.put("/board", async (req, res) => {
-  return res.status(200).send("뀨");
-});
+
 router.post("/board", async (req, res) => {
   return res.status(200).send("뀨");
 });
+
+router.put("/board", async (req, res) => {
+  return res.status(200).send("뀨");
+});
+
 router.delete("/board", async (req, res) => {
   return res.status(200).send("뀨");
+});
+
+router.get("/error", async (req, res) => {
+  setTimeout(() => {
+    return res.status(405).send("뀨");
+  }, 200);
 });
 
 module.exports = router;

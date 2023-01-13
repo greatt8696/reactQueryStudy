@@ -16,10 +16,19 @@ module.exports = {
         "blink-text-red": "blink-text-red 0.4s ease-in-out 1",
         "blink-ba-green": "blink-ba-green 0.6s ease-in-out 1",
         "blink-ba-red": "blink-ba-red 0.6s ease-in-out 1",
+        gradientLoading: "loadingFrame 0.8s linear infinite",
       },
 
       // 내가 원하는 animation-keyframes 지정
       keyframes: {
+        loadingFrame: {
+          "100%": {
+            backgroundPosition: "0% 0%",
+          },
+          "0%": {
+            backgroundPosition: "100% 100%",
+          },
+        },
         introFrameX: {
           "0%": { transform: "translateX(100px)", opacity: 0 },
           "50%": { transform: "translateX(-11px)", opacity: 25 },
