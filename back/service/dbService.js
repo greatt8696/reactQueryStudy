@@ -18,6 +18,12 @@ class DbService {
     this.autoIncreasements.find(({ name }) => name === inputName)
       .autoIncreasement;
 
+  getDataById = (inputName, inputIdx) => {
+    const schemes = this.schemes.find(({ name }) => name === inputName);
+    // console.log(schemes);
+    return schemes.data[inputIdx];
+  };
+
   addData = (inputName, inputData) => {
     const schemes = this.schemes.find(({ name }) => name === inputName);
     const prevData = schemes.data;
@@ -27,6 +33,19 @@ class DbService {
     ];
     this.schemes = this.schemes.map((scheme) => {
       return scheme.name === inputName ? { ...scheme, data: newData } : scheme;
+    });
+  };
+
+  updateData = (inputName, inputData) => {
+    const schemes = this.schemes.find(({ name }) => name === inputName);
+    const prevData = schemes.data;
+    const updatedData = prevData.map((data) =>
+      data.id === inputData.id ? inputData : data
+    );
+    this.schemes = this.schemes.map((scheme) => {
+      return scheme.name === inputName
+        ? { ...scheme, data: updatedData }
+        : scheme;
     });
   };
 
@@ -42,8 +61,14 @@ class DbService {
   };
 }
 
-const dbService = new DbService([{ name: "board", data: initBoard }]);
+const dbService = new DbService([
+  { name: "board", data: initBoard },
+  // { name: "user", data: initUser },
+  // { name: "board2", data: initBoard },
+  // { name: "board3", data: initBoard },
+]);
 
+// console.log(dbService.getDataById("board", 49));
 /*
 dbService.addData("board", {
   title: "#47 제목",
@@ -51,11 +76,27 @@ dbService.addData("board", {
   writer: "#47 죠르디",
   view: 0,
 });
-console.log(dbService.deleteDataById("board", 49));
-console.log(dbService.deleteDataById("board", 48));
+dbService.updateData("board", {
+  id : 49
+  title: "#49 제목",
+  content: "#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정",
+  writer: "#49 죠르디",
+  view: 0,
+});
 console.log(dbService.deleteDataById("board", 49));
 console.log(dbService.getAllScheme("board"));
 console.log(dbService.getAutoIncreasementIdx("board"));
 */
+
+// dbService.updateData("board", {
+//   id: 49,
+//   title: "#49 제목",
+//   content:
+//     "#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정",
+//   writer: "#49 죠르디",
+//   view: 0,
+// });
+
+console.log(dbService.getAllScheme("board"));
 
 module.exports = { dbService };
