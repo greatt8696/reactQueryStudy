@@ -1,8 +1,11 @@
 import React from 'react'
-import { getBoardById, getBoards, getError } from '../../hook/useQuery'
+import { useMutation } from 'react-query'
+import { useNavigate } from 'react-router-dom'
+import { getBoardById, getBoards, getError, updateBoardById } from '../../hook/useQuery'
 
 const Main = () => {
-
+  const nav = useNavigate()
+  const clickHandler = (id) => nav(`/board/${id}`)
   const boardQuery = getBoards({
     // 모든 게시글 가져오기
     onSuccess: (data) => {
@@ -35,12 +38,22 @@ const Main = () => {
     },
   })
 
+  const {mutate} = updateBoardById({data:{
+    id : 49,
+    title: "#49 제목",
+    content: "#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정",
+    writer: "#49 죠르디",
+    view: 0,
+}})
+
+  const updateHandler = () = 
   return (
     <div>
+      <button>뒤로가기</button>
+      <button onClick={updateHandler}> 업데이트하기 </button>
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll">
         <div className="w-3/4 h-1/2 min-w-[500px] m-auto my-24 gap-5 flex flex-col">
-
           {/* boardQueryById 시작 */}
           {boardQueryById.isLoading ? (
             // 로딩중 보이는 태그
@@ -60,8 +73,14 @@ const Main = () => {
           ) : (
             // 로딩이끝난 후 보이는 태그
             boardQuery?.data.map((board) => (
-              <div className=" text-3xl text-white h-16 align-middle" onClick={()=>{}}>
-                {JSON.stringify(board)}
+              <div
+                key={board.id + board.title}
+                className=" text-3xl text-white h-16 align-middle flex flex-col"
+                onClick={() => clickHandler(board.id)}
+              >
+                <div>{board.id}</div>
+                <div>{board.title}</div>
+                <div>{board.content}</div>
               </div>
             ))
           )}
@@ -77,7 +96,6 @@ const Main = () => {
             )
           )}
           {/* errorQuery 끝 */}
-
         </div>
       </div>
     </div>
