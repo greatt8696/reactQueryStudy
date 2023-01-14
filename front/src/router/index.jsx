@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import Main from '../views/main/Main'
+import BoardDetail from '../views/boardDetail/Main'
 
 const Router = () => {
   const routes = [
@@ -8,7 +9,7 @@ const Router = () => {
       path: '/',
       element: <Main />,
       children:[
-        
+        {path:"board/:id", element:<BoardDetail></BoardDetail>}
       ]
     },
   ]

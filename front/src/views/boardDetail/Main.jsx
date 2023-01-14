@@ -1,7 +1,7 @@
 import React from 'react'
 import { getBoardById, getBoards, getError } from '../../hook/useQuery'
 
-const Main = () => {
+const boardDetail = () => {
 
   const boardQuery = getBoards({
     // 모든 게시글 가져오기
@@ -37,6 +37,7 @@ const Main = () => {
 
   return (
     <div>
+      <button>뒤로가기</button>
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll">
         <div className="w-3/4 h-1/2 min-w-[500px] m-auto my-24 gap-5 flex flex-col">
@@ -60,7 +61,7 @@ const Main = () => {
           ) : (
             // 로딩이끝난 후 보이는 태그
             boardQuery?.data.map((board) => (
-              <div className=" text-3xl text-white h-16 align-middle" onClick={()=>{}}>
+              <div className=" text-3xl text-white h-16 align-middle">
                 {JSON.stringify(board)}
               </div>
             ))
@@ -84,4 +85,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default boardDetail

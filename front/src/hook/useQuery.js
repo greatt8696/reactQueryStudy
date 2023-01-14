@@ -46,11 +46,6 @@ const makePutBoard =
       })
       .then(({ data }) => data);
 
-
-
-
-
-
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.
 
@@ -93,8 +88,8 @@ export const getBoardById = (props) => {
 };
 
 export const putBoardById = (props) => {
-  const fetchBoardById = makeFetchBoardById(props.params);
-  return useMutation([BOARD_KEY, props.params.id], fetchBoardById, {
+  const fetchBoardById = makePutBoard(props.params);
+  return useMutation(fetchBoardById, {
     ...props,
     ...defaultOption,
   });

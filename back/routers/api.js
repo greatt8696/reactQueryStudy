@@ -27,12 +27,14 @@ console.log(dbService.getAutoIncreasementIdx("board"));
 
 */
 
+console.log(dbService.getAllScheme("board"));
+
 router.get("/board", async (req, res) => {
   setTimeout(() => {
     console.log(
-      "get-/board 응답 length : " + dbService.getAllScheme("board").length
+      "get-/board 응답 length : " + dbService.getAllScheme("board").data.length
     );
-    return res.status(200).send(dbService.getAllScheme("board"));
+    return res.status(200).send(dbService.getAllScheme("board").data);
   }, 2000);
 });
 
