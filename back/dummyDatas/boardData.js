@@ -22,6 +22,4 @@ const initBoard = Array(DATA_SIZE)
     return newData;
   });
 
-  console.log(initBoard);
-
 module.exports = { initBoard };

@@ -7,6 +7,9 @@ const Router = () => {
     {
       path: '/',
       element: <Main />,
+      children:[
+        
+      ]
     },
   ]
   return useRoutes(routes)

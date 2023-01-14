@@ -2,8 +2,9 @@ import React from 'react'
 import { getBoardById, getBoards, getError } from '../../hook/useQuery'
 
 const Main = () => {
-  // const boardQuery = {};
+
   const boardQuery = getBoards({
+    // 모든 게시글 가져오기
     onSuccess: (data) => {
       console.log('boardQuery 성공 : ', data)
     },
@@ -13,6 +14,7 @@ const Main = () => {
   })
 
   const boardQueryById = getBoardById({
+    // id로 게시글 가져오기
     // 파라미터로 id 쿼리 보낼수 있음
     params: { id: 18 },
     onSuccess: (data) => {
@@ -38,6 +40,7 @@ const Main = () => {
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll">
         <div className="w-3/4 h-1/2 min-w-[500px] m-auto my-24 gap-5 flex flex-col">
+
           {/* boardQueryById 시작 */}
           {boardQueryById.isLoading ? (
             // 로딩중 보이는 태그
@@ -62,7 +65,6 @@ const Main = () => {
               </div>
             ))
           )}
-
           {/* boardQuery 끝 */}
 
           {/* errorQuery 시작 */}
@@ -75,6 +77,7 @@ const Main = () => {
             )
           )}
           {/* errorQuery 끝 */}
+
         </div>
       </div>
     </div>

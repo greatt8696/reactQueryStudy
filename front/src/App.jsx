@@ -5,6 +5,7 @@ import Router from './router'
 const queryClient = new QueryClient();
 function App() {
   return (
+    // QueryClientProvider : react-query의 store (redux-store 또는 context 역할) 
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Router />
