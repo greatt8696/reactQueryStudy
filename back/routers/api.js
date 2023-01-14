@@ -2,9 +2,22 @@ const router = require("express").Router();
 
 const { dbService } = require("../service/dbService");
 
+/* dbService 예시
+
+dbService.addData("board", {
+  title: "#47 제목",
+  content: "#47 내용",
+  writer: "#47 죠르디",
+  view: 0,
+});
+console.log(dbService.deleteDataById("board", 49));
+console.log(dbService.getAllScheme("board"));
+console.log(dbService.getAutoIncreasementIdx("board"));
+*/
+
 router.get("/board", async (req, res) => {
   setTimeout(() => {
-    return res.status(200).send(initBoard);
+    return res.status(200).send(dbService);
   }, 2000);
 });
 

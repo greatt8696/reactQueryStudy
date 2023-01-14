@@ -44,17 +44,18 @@ class DbService {
 
 const dbService = new DbService([{ name: "board", data: initBoard }]);
 
+/*
 dbService.addData("board", {
   title: "#47 제목",
   content: "#47 내용",
   writer: "#47 죠르디",
   view: 0,
 });
-
 console.log(dbService.deleteDataById("board", 49));
 console.log(dbService.deleteDataById("board", 48));
 console.log(dbService.deleteDataById("board", 49));
 console.log(dbService.getAllScheme("board"));
-
 console.log(dbService.getAutoIncreasementIdx("board"));
-module.dbService = { dbService };
+*/
+
+module.exports = { dbService };
