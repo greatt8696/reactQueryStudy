@@ -20,6 +20,7 @@ const Main = () => {
     onError: (e) => {
       console.log('boardQuery 실패 : ', e)
     },
+    enabled: !queryClient.getQueryData('board'),
   })
 
   const boardQueryById = getBoardById({

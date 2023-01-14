@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { useQueryClient } from 'react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -23,13 +24,23 @@ const BoardDetail = () => {
     onError: (e) => {
       console.log('boardQueryById 실패 : error : ', e)
     },
+    enabled: !queryClient.getQueryData('board'),
   })
+
+  console.log(queryClient.getQueryData('board'))
   return (
     <div>
       <button onClick={() => nav(-1)}>뒤로가기</button>
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll text-white">
-        <div>{JSON.stringify(boardQueryById.data)}</div>
+        {boardQueryById.isSuccess && (
+          <div>{JSON.stringify(boardQueryById.data)}</div>
+        )}
+        {queryClient?.getQueryData('board') && (
+          <div>
+            {JSON.stringify(queryClient.getQueryData('board')[id])}
+          </div>
+        )}
       </div>
     </div>
   )

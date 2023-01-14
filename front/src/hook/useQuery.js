@@ -37,9 +37,9 @@ const fetchError = async () =>
 const fetchBoardById = async (id) =>
   await axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
 
-const makePatchBoard = async (data) =>
+const patchBoardWithData = async (data) =>
   await axiosInstance
-    .patch(BOARD + `/${data.id}`, { data: data })
+    .patch(BOARD + `/${data.id}`, { data })
     .then(({ data }) => data);
 
 // 선언한 axios 들을 react-query로 감싸기
@@ -87,7 +87,7 @@ export const getBoardById = (props) => {
 };
 
 export const updateBoardById = (props) => {
-  return useMutation(makePatchBoard, {
+  return useMutation(patchBoardWithData, {
     ...props,
     ...defaultOption,
   });
