@@ -12,7 +12,7 @@ dbService.addData("board", {
 });
 
 dbService.updateData("board", {
-  id : 49
+  id : 49,
   title: "#49 제목",
   content: "#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정",
   writer: "#49 죠르디",
@@ -54,11 +54,15 @@ router.delete("/board", async (req, res) => {
   return res.status(200).send(true);
 });
 
-router.put("/board/:id", async (req, res) => {
+router.patch("/board/:id", async (req, res) => {
+  const { data } = req.body;
   console.log(
     "put-/board/:id 응답 : " +
       JSON.stringify(dbService.getDataById("board", id))
   );
+
+  dbService.updateData({data});
+
   return res.status(200).send("뀨");
 });
 

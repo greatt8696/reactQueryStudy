@@ -28,23 +28,19 @@ const defaultOption = {
 };
 
 // url 대로 axios 선언해놓기
-const fetchBoards = () => axiosInstance.get(BOARD).then(({ data }) => data); // url axios (http://localhost:3000/api/board)
-const fetchError = () => axiosInstance.get(ERROR).then(({ data }) => data);
+const fetchBoards = async () =>
+  await axiosInstance.get(BOARD).then(({ data }) => data); // url axios (http://localhost:3000/api/board)
+const fetchError = async () =>
+  await axiosInstance.get(ERROR).then(({ data }) => data);
 // const fetchBoardById = () =>
 //   axiosInstance.get(BOARD + `/${1}`).then(({ data }) => data);
-const makeFetchBoardById =
-  ({ id }) =>
-  () =>
-    axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
+const makeFetchBoardById = async ({ id }) =>
+  await axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
 
-const makePutBoard =
-  ({ data }) =>
-  () =>
-    axiosInstance
-      .get(BOARD + `/${data.id}`, {
-        data: data,
-      })
-      .then(({ data }) => data);
+const makePatchBoard = async (data) =>
+  await axiosInstance
+    .patch(BOARD + `/${data.id}`, { data: data })
+    .then(({ data }) => data);
 
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.
@@ -87,8 +83,8 @@ export const getBoardById = (props) => {
   });
 };
 
-export const putBoardById = (props) => {
-  const fetchBoardById = makePutBoard(props.params);
+export const updateBoardById = (props) => {
+  const fetchBoardById = makePatchBoard(props.data);
   return useMutation(fetchBoardById, {
     ...props,
     ...defaultOption,
