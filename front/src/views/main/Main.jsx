@@ -16,7 +16,7 @@ const Main = () => {
   const boardQueryById = getBoardById({
     // id로 게시글 가져오기
     // 파라미터로 id 쿼리 보낼수 있음
-    params: { id: 18 },
+    params: { id: 15 },
     onSuccess: (data) => {
       console.log('boardQueryById 성공  : ', data)
     },

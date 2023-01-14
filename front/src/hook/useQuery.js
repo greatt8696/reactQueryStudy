@@ -37,6 +37,15 @@ const makeFetchBoardById =
   () =>
     axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
 
+const makePutBoard =
+  ({ data }) =>
+  () =>
+    axiosInstance
+      .get(BOARD + `/${data.id}`, {
+        data: data,
+      })
+      .then(({ data }) => data);
+
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.
 
@@ -89,4 +98,3 @@ export const putBoardById = () =>
   useQuery({ queryKey: [BOARD_KEY], queryFn: axiosInstance.put(BOARD) });
 export const deleteBoardById = () =>
   useQuery({ queryKey: [BOARD_KEY], queryFn: axiosInstance.get(BOARD) });
-

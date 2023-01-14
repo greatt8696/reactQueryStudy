@@ -29,6 +29,9 @@ console.log(dbService.getAutoIncreasementIdx("board"));
 
 router.get("/board", async (req, res) => {
   setTimeout(() => {
+    console.log(
+      "get-/board 응답 length : " + dbService.getAllScheme("board").length
+    );
     return res.status(200).send(dbService.getAllScheme("board"));
   }, 2000);
 });
@@ -37,21 +40,22 @@ router.get("/board/:id", async (req, res) => {
   const { id } = req.params;
   setTimeout(() => {
     console.log(
-      "get-/board/:id 응답 : " + JSON.stringify(dbService.getDataById("board",id))
+      "get-/board/:id 응답 : " +
+        JSON.stringify(dbService.getDataById("board", id))
     );
-    return res.status(200).send(dbService.getDataById("board",id));
+    return res.status(200).send(dbService.getDataById("board", id));
   }, 1500);
 });
 
 router.delete("/board", async (req, res) => {
-  dbService.deleteDataById("board",id)
+  dbService.deleteDataById("board", id);
   return res.status(200).send(true);
 });
 
 router.put("/board/:id", async (req, res) => {
-
   console.log(
-    "put-/board/:id 응답 : " + JSON.stringify(dbService.getDataById("board",id))
+    "put-/board/:id 응답 : " +
+      JSON.stringify(dbService.getDataById("board", id))
   );
   return res.status(200).send("뀨");
 });
