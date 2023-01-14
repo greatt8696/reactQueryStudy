@@ -4,7 +4,7 @@ const { initBoard } = require("../dummyDatas/boardData.js");
 
 router.get("/board", async (req, res) => {
   setTimeout(() => {
-    return res.status(200).send("뀨");
+    return res.status(200).send(initBoard);
   }, 2000);
 });
 

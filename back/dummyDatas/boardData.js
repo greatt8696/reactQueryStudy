@@ -1,4 +1,4 @@
-const DATA_SIZE = 10;
+const DATA_SIZE = 50;
 
 const boardObj = {
   id: 0,
@@ -8,7 +8,7 @@ const boardObj = {
   view: 0,
 };
 
-const initBoard = Array(1000)
+const initBoard = Array(DATA_SIZE)
   .fill()
   .map((_, idx) => {
     const newData = { ...boardObj };
