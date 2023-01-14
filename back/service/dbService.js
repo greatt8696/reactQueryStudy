@@ -1,4 +1,10 @@
 const { initBoard } = require("../dummyDatas/boardData.js");
+const { initUser } = require("../dummyDatas/userData.js");
+
+
+/**
+ * @type
+ */
 
 class DbService {
   /**
@@ -59,11 +65,22 @@ class DbService {
         : scheme;
     });
   };
+
+  compareData = (inputName, inputId) => {
+    const schemes = this.schemes.findIdx(({ name }) => name === inputName);
+    const prevData = schemes.data;
+    const deletedData = prevData.filter(({ id }) => id !== inputId);
+    this.schemes = this.schemes.map((scheme) => {
+      return scheme.name === inputName
+        ? { ...scheme, data: deletedData }
+        : scheme;
+    });
+  };
 }
 
 const dbService = new DbService([
   { name: "board", data: initBoard },
-  // { name: "user", data: initUser },
+  { name: "user", data: initUser },
   // { name: "board2", data: initBoard },
   // { name: "board3", data: initBoard },
 ]);
@@ -87,16 +104,5 @@ console.log(dbService.deleteDataById("board", 49));
 console.log(dbService.getAllScheme("board"));
 console.log(dbService.getAutoIncreasementIdx("board"));
 */
-
-// dbService.updateData("board", {
-//   id: 49,
-//   title: "#49 제목",
-//   content:
-//     "#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정",
-//   writer: "#49 죠르디",
-//   view: 0,
-// });
-
-console.log(dbService.getAllScheme("board"));
 
 module.exports = { dbService };

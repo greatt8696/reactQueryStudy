@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { parse, stringify } from "qs";
 
 // 상수 시작
@@ -46,6 +46,11 @@ const makePutBoard =
       })
       .then(({ data }) => data);
 
+
+
+
+
+
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.
 
@@ -87,6 +92,14 @@ export const getBoardById = (props) => {
   });
 };
 
+export const putBoardById = (props) => {
+  const fetchBoardById = makeFetchBoardById(props.params);
+  return useMutation([BOARD_KEY, props.params.id], fetchBoardById, {
+    ...props,
+    ...defaultOption,
+  });
+};
+
 export const getError = (props) => {
   return useQuery([ERROR_KEY], fetchError, {
     ...props,
@@ -94,7 +107,5 @@ export const getError = (props) => {
   });
 };
 
-export const putBoardById = () =>
-  useQuery({ queryKey: [BOARD_KEY], queryFn: axiosInstance.put(BOARD) });
 export const deleteBoardById = () =>
   useQuery({ queryKey: [BOARD_KEY], queryFn: axiosInstance.get(BOARD) });
