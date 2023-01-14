@@ -34,7 +34,7 @@ const fetchError = async () =>
   await axiosInstance.get(ERROR).then(({ data }) => data);
 // const fetchBoardById = () =>
 //   axiosInstance.get(BOARD + `/${1}`).then(({ data }) => data);
-const makeFetchBoardById = async ({ id }) =>
+const fetchBoardById = async (id) =>
   await axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
 
 const makePatchBoard = async (data) =>
@@ -76,16 +76,18 @@ export const getBoards = (props) => {
 };
 
 export const getBoardById = (props) => {
-  const fetchBoardById = makeFetchBoardById(props.params);
-  return useQuery([BOARD_KEY, props.params.id], fetchBoardById, {
-    ...props,
-    ...defaultOption,
-  });
+  return useQuery(
+    [BOARD_KEY, props.params.id],
+    () => fetchBoardById(props.params.id),
+    {
+      ...props,
+      ...defaultOption,
+    }
+  );
 };
 
 export const updateBoardById = (props) => {
-  const fetchBoardById = makePatchBoard(props.data);
-  return useMutation(fetchBoardById, {
+  return useMutation(makePatchBoard, {
     ...props,
     ...defaultOption,
   });

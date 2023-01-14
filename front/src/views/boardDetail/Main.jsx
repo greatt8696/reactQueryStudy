@@ -12,8 +12,6 @@ const BoardDetail = () => {
   const [id, setId] = useState(location.pathname.split(`/`)[2])
 
   const queryClient = useQueryClient()
-  console.log()
-  console.log(queryClient.getQueryCache(['board']))
 
   const boardQueryById = getBoardById({
     // id로 게시글 가져오기

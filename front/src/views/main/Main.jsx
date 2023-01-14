@@ -1,11 +1,17 @@
 import React from 'react'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-import { getBoardById, getBoards, getError, updateBoardById } from '../../hook/useQuery'
+import {
+  getBoardById,
+  getBoards,
+  getError,
+  updateBoardById,
+} from '../../hook/useQuery'
 
 const Main = () => {
   const nav = useNavigate()
   const clickHandler = (id) => nav(`/board/${id}`)
+  const queryClient = useQueryClient()
   const boardQuery = getBoards({
     // 모든 게시글 가져오기
     onSuccess: (data) => {
@@ -38,15 +44,21 @@ const Main = () => {
     },
   })
 
-  const {mutate} = updateBoardById({data:{
-    id : 49,
-    title: "#49 제목",
-    content: "#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정",
-    writer: "#49 죠르디",
-    view: 0,
-}})
+  const updateBoard = updateBoardById({
+    onSuccess: () => {
+      queryClient.invalidateQueries('board')
+    },
+  })
 
-  const updateHandler = () = 
+  const updateHandler = () =>
+    updateBoard.mutate({
+      id: 49,
+      title: '#49 제목',
+      content:
+        '#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정',
+      writer: '#49 죠르디',
+      view: 0,
+    })
   return (
     <div>
       <button>뒤로가기</button>
@@ -75,7 +87,7 @@ const Main = () => {
             boardQuery?.data.map((board) => (
               <div
                 key={board.id + board.title}
-                className=" text-3xl text-white h-16 align-middle flex flex-col"
+                className=" text-3xl text-white h-16 align-middle flex gap-5"
                 onClick={() => clickHandler(board.id)}
               >
                 <div>{board.id}</div>
