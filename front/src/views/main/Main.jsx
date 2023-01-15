@@ -1,11 +1,11 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import {
   getBoardById,
   getBoards,
   getError,
-  updateBoardById,
 } from '../../hook/useQuery'
 
 const Main = () => {
@@ -45,25 +45,17 @@ const Main = () => {
     },
   })
 
-  const updateBoard = updateBoardById({
-    onSuccess: () => {
-      queryClient.invalidateQueries('board')
-    },
-  })
 
-  const updateHandler = () =>
-    updateBoard.mutate({
-      id: 49,
-      title: '#49 제목',
-      content:
-        '#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정',
-      writer: '#49 죠르디',
-      view: 0,
-    })
+  useEffect(() => {
+    console.log(
+      'react-query의 store에 저장(캐싱)된 데이터',
+      queryClient.getQueryData('board'),
+    )
+  }, [])
+
   return (
     <div>
       <button>뒤로가기</button>
-      <button onClick={updateHandler}> 업데이트하기 </button>
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll">
         <div className="w-3/4 h-1/2 min-w-[500px] m-auto my-24 gap-5 flex flex-col">

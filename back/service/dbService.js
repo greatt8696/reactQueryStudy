@@ -48,6 +48,7 @@ class DbService {
     const updatedData = prevData.map((data) =>
       data.id === inputData.id ? inputData : data
     );
+    console.log(updatedData);
     this.schemes = this.schemes.map((scheme) => {
       return scheme.name === inputName
         ? { ...scheme, data: updatedData }

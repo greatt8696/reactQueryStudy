@@ -38,9 +38,10 @@ const fetchBoardById = async (id) =>
   await axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
 
 const patchBoardWithData = async (data) =>
-  await axiosInstance
+  {console.log(data);
+    return await axiosInstance
     .patch(BOARD + `/${data.id}`, { data })
-    .then(({ data }) => data);
+    .then(({ data }) => data);}
 
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.

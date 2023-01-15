@@ -56,13 +56,14 @@ router.delete("/board", async (req, res) => {
 
 router.patch("/board/:id", async (req, res) => {
   const { data } = req.body;
+  const { id } = req.params;
   console.log(
     "put-/board/:id 응답 : " +
       JSON.stringify(dbService.getDataById("board", id))
   );
 
-  dbService.updateData({data});
-
+  dbService.updateData("board",{data});
+  console.log( dbService.getAllScheme("board"));
   return res.status(200).send("뀨");
 });
 
