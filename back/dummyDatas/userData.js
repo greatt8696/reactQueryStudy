@@ -19,7 +19,7 @@ const initUser = Array(DATA_SIZE)
     newData.rank = `#${idx} ${userObj.rank}`;
     newData.password = userObj.password;
 
-    return newData;
+    return newData; 
   });
 
 module.exports = { initUser };

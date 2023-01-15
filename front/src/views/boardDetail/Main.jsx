@@ -64,8 +64,8 @@ const BoardDetail = () => {
 
   return (
     <div>
-      <button onClick={() => nav(-1)}>뒤로가기</button>
-      <button onClick={updateHandler}> 업데이트하기 </button>
+      <button onClick={() => nav(-1)} style={{backgroundColor: "red", margin:"15px",padding:"5px"}}>뒤로가기</button>
+      <button onClick={updateHandler} style={{backgroundColor: "green", margin:"15px",padding:"5px"}}> 업데이트하기 </button>
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll text-white">
         {boardQueryById.isSuccess && (

@@ -57,7 +57,6 @@ const Main = () => {
 
   return (
     <div>
-      <button>뒤로가기</button>
       <div className="w-full h-20 fixed z-50"></div>
       <div className="App example flex min-w-[800px] overflow-y-scroll">
         <div className="w-3/4 h-1/2 min-w-[500px] m-auto my-24 gap-5 flex flex-col">
