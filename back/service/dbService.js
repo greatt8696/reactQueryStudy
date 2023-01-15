@@ -44,11 +44,13 @@ class DbService {
 
   updateData = (inputName, inputData) => {
     const schemes = this.schemes.find(({ name }) => name === inputName);
+    const newData = inputData.data
     const prevData = schemes.data;
     const updatedData = prevData.map((data) =>
-      data.id === inputData.id ? inputData : data
+      data.id === newData.id ? newData : data
     );
-    console.log(updatedData);
+    console.log(newData.id);
+    console.log(newData);
     this.schemes = this.schemes.map((scheme) => {
       return scheme.name === inputName
         ? { ...scheme, data: updatedData }
