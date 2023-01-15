@@ -3,7 +3,13 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useQueryClient } from 'react-query'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getBoardById, getBoards, getError, updateBoardById } from '../../hook/useQuery'
+import {
+  BOARD_KEY,
+  getBoardById,
+  getBoards,
+  getError,
+  updateBoardById,
+} from '../../hook/useQuery'
 
 const BoardDetail = () => {
   const nav = useNavigate()
@@ -24,32 +30,37 @@ const BoardDetail = () => {
     onError: (e) => {
       console.log('boardQueryById 실패 : error : ', e)
     },
-    enabled: !queryClient.getQueryData('board'),
   })
 
   useEffect(() => {
     console.log(
       'react-query의 store에 저장(캐싱)된 데이터',
-      queryClient.getQueryData('board'),
+      queryClient.getQueryData([BOARD_KEY, id]),
     )
-  }, [])
+    console.log(queryClient);
+  }, [queryClient])
 
-  const updateBoard = updateBoardById({
-    onSuccess: () => {
-      queryClient.invalidateQueries('board')
-      console.log("수정됨");
-    },
-  })
+  const updateBoard = updateBoardById()
 
   const updateHandler = () =>
-    updateBoard.mutate({
-      id: 49,
-      title: '#49 제목',
-      content:
-        '#49 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정',
-      writer: '#49 죠르디',
-      view: 0,
-    })
+    updateBoard.mutate(
+      {
+        id: id,
+        title: `#${id} 제목`,
+        content: `#${id} 내용수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정수정`,
+        writer: `#${id} 죠르디`,
+        view: 0,
+      },
+      {
+        onSuccess: () => {
+          console.log(
+            'onSuccess 성공: queryClient.invalidateQueries(BOARD_KEY) ',
+          )
+          queryClient.invalidateQueries([BOARD_KEY])
+          queryClient.invalidateQueries([BOARD_KEY, id])
+        },
+      },
+    )
 
   return (
     <div>
@@ -60,9 +71,12 @@ const BoardDetail = () => {
         {boardQueryById.isSuccess && (
           <div>{JSON.stringify(boardQueryById.data)}</div>
         )}
-        {queryClient?.getQueryData('board') && (
-          <div>{JSON.stringify(queryClient.getQueryData('board')[id])}</div>
-        )}
+        {!boardQueryById.isSuccess &&
+          queryClient?.getQueryData([BOARD_KEY]) && (
+            <div>
+              {JSON.stringify(queryClient.getQueryData([BOARD_KEY])[id])}
+            </div>
+          )}
       </div>
     </div>
   )

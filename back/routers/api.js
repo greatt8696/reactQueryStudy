@@ -35,7 +35,7 @@ router.get("/board", async (req, res) => {
       "get-/board 응답 length : " + dbService.getAllScheme("board").data.length
     );
     return res.status(200).send(dbService.getAllScheme("board").data);
-  }, 2000);
+  }, 500);
 });
 
 router.get("/board/:id", async (req, res) => {
@@ -46,7 +46,7 @@ router.get("/board/:id", async (req, res) => {
         JSON.stringify(dbService.getDataById("board", id))
     );
     return res.status(200).send(dbService.getDataById("board", id));
-  }, 1500);
+  }, 500);
 });
 
 router.delete("/board", async (req, res) => {
@@ -59,11 +59,10 @@ router.patch("/board/:id", async (req, res) => {
   const { id } = req.params;
   console.log(
     "patch-/board/:id 응답 : " +
-      JSON.stringify(dbService.getDataById("board", id))
+      JSON.stringify(data)
   );
   
   dbService.updateData("board",{data});
-  //console.log( dbService.getAllScheme("board"));
   return res.status(200).send("뀨");
 });
 

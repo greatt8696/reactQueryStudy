@@ -20,9 +20,12 @@ const Main = () => {
     onError: (e) => {
       console.log('boardQuery 실패 : ', e)
     },
-    enabled: !queryClient.getQueryData('board'),
   })
 
+  const boardQueryById = true
+  const errorQuery = true
+
+  /** 
   const boardQueryById = getBoardById({
     // id로 게시글 가져오기
     // 파라미터로 id 쿼리 보낼수 있음
@@ -34,7 +37,6 @@ const Main = () => {
       console.log('boardQueryById 실패 : error : ', e)
     },
   })
-
   const errorQuery = getError({
     // 에러가 나는 404 api주소로 접속 로그로 보면 재호출이 몇번 일어나는지 확인가능
     onSuccess: (data) => {
@@ -44,7 +46,7 @@ const Main = () => {
       console.error('실패 : error : ', e)
     },
   })
-
+*/
 
   useEffect(() => {
     console.log(

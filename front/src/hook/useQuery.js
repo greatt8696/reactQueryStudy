@@ -8,8 +8,8 @@ const BASE_URL = "http://localhost:3000";
 const BOARD = "/api/board";
 const ERROR = "/api/error";
 
-const BOARD_KEY = "board";
-const ERROR_KEY = "error";
+export const BOARD_KEY = "board";
+export const ERROR_KEY = "error";
 // 상수 끝
 
 // AXIOS 기본 옵션 설정
@@ -25,6 +25,8 @@ const axiosInstance = axios.create({
 const defaultOption = {
   refetchOnWindowFocus: true, // react-query는 사용자가 사용하는 윈도우가 다른 곳을 갔다가 다시 화면으로 돌아오면 이 함수를 재실행합니다. 재실행 여부 옵션
   retry: 1, // 실패시 재호출 몇번 할지
+  cacheTime: 50000, // 저장된 데이터의 유효기간
+  staleTime: 5000, //
 };
 
 // url 대로 axios 선언해놓기
@@ -32,17 +34,12 @@ const fetchBoards = async () =>
   await axiosInstance.get(BOARD).then(({ data }) => data); // url axios (http://localhost:3000/api/board)
 const fetchError = async () =>
   await axiosInstance.get(ERROR).then(({ data }) => data);
-// const fetchBoardById = () =>
-//   axiosInstance.get(BOARD + `/${1}`).then(({ data }) => data);
 const fetchBoardById = async (id) =>
   await axiosInstance.get(BOARD + `/${id}`).then(({ data }) => data);
-
 const patchBoardWithData = async (data) =>
-  {console.log(data);
-    return await axiosInstance
+  await axiosInstance
     .patch(BOARD + `/${data.id}`, { data })
-    .then(({ data }) => data);}
-
+    .then(({ data }) => data);
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.
 
@@ -70,6 +67,7 @@ const patchBoardWithData = async (data) =>
  */
 
 export const getBoards = (props) => {
+  console.log("getBoards");
   return useQuery([BOARD_KEY], fetchBoards, {
     ...props,
     ...defaultOption,

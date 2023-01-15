@@ -1,7 +1,6 @@
 const { initBoard } = require("../dummyDatas/boardData.js");
 const { initUser } = require("../dummyDatas/userData.js");
 
-
 /**
  * @type
  */
@@ -44,18 +43,18 @@ class DbService {
 
   updateData = (inputName, inputData) => {
     const schemes = this.schemes.find(({ name }) => name === inputName);
-    const newData = inputData.data
+    const newData = inputData.data;
     const prevData = schemes.data;
     const updatedData = prevData.map((data) =>
-      data.id === newData.id ? newData : data
+      { 
+        console.log(`data.id ${data.id}  newData.id ${newData.id} ${data.id === newData.id}`); 
+        return `${data.id}` === `${newData.id}` ? newData : data}
     );
-    console.log(newData.id);
+    console.log(updatedData);
     console.log(newData);
-    this.schemes = this.schemes.map((scheme) => {
-      return scheme.name === inputName
-        ? { ...scheme, data: updatedData }
-        : scheme;
-    });
+    this.schemes = this.schemes.map((scheme) =>
+      scheme.name === inputName ? { ...scheme, data: updatedData } : scheme
+    );
   };
 
   deleteDataById = (inputName, inputId) => {
