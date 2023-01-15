@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   getBoardById,
   getBoards,
+  getBoardWithFilter,
   getError,
 } from '../../hook/useQuery'
 
@@ -24,6 +25,25 @@ const Main = () => {
 
   const boardQueryById = true
   const errorQuery = true
+
+  const boardQueryByFilter = getBoardWithFilter({
+    // id로 게시글 가져오기
+    // 파라미터로 id 쿼리 보낼수 있음
+    params: {
+      search: {
+        fitler1: 111,
+        fitler2: 222,
+        fitler3: 333,
+        fitler4: 444,
+      },
+    },
+    onSuccess: (data) => {
+      console.log('boardQueryByFilter 성공  : ', data)
+    },
+    onError: (e) => {
+      console.log('boardQueryByFilter 실패 : error : ', e)
+    },
+  })
 
   /** 
   const boardQueryById = getBoardById({

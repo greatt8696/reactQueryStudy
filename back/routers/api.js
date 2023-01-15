@@ -66,6 +66,11 @@ router.patch("/board/:id", async (req, res) => {
   return res.status(200).send("뀨");
 });
 
+
+router.get("/search", async (req, res) => {
+  console.log(req.query);
+  return res.status(200).send("뀨");
+});
 router.delete("/board", async (req, res) => {
   return res.status(200).send("뀨");
 });

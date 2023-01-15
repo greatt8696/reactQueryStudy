@@ -7,6 +7,7 @@ const BASE_URL = "http://localhost:3000";
 
 const BOARD = "/api/board";
 const ERROR = "/api/error";
+const SEARCH = "/api/search";
 
 export const BOARD_KEY = "board";
 export const ERROR_KEY = "error";
@@ -20,10 +21,9 @@ const axiosInstance = axios.create({
   // 응답시간제한
   timeout: 3000,
 });
-axios.defaults.paramsSerializer = params => {
+axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);
-}
-
+};
 
 // REACT-QUERY 기본 옵션 설정
 const defaultOption = {
@@ -47,8 +47,8 @@ const patchBoardWithData = async (data) =>
 // 선언한 axios 들을 react-query로 감싸기
 // 감싸진 함수들은 각 컴포넌트에 모듈형식으로 쓰이게 됩니다.
 
-
-
+const fetchBoardWithFilter = async (params) =>
+  await axiosInstance.get(SEARCH, { params }).then(({ data }) => data);
 
 /** main.jsx (View) 에서 호출했을때 형태 
  * 
@@ -85,6 +85,17 @@ export const getBoardById = (props) => {
   return useQuery(
     [BOARD_KEY, props.params.id],
     () => fetchBoardById(props.params.id),
+    {
+      ...props,
+      ...defaultOption,
+    }
+  );
+};
+
+export const getBoardWithFilter = (props) => {
+  return useQuery(
+    [BOARD_KEY, "filter"],
+    () => fetchBoardWithFilter(props.params),
     {
       ...props,
       ...defaultOption,
