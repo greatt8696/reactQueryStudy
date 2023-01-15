@@ -6,6 +6,7 @@ const boardObj = {
   content: "내용",
   writer: "죠르디",
   view: 0,
+  
 };
 
 const initBoard = Array(DATA_SIZE)
