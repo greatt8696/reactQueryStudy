@@ -35,7 +35,7 @@ router.get("/board", async (req, res) => {
       "get-/board 응답 length : " + dbService.getAllScheme("board").data.length
     );
     return res.status(200).send(dbService.getAllScheme("board").data);
-  }, 500);
+  }, 1500);
 });
 
 router.get("/board/:id", async (req, res) => {

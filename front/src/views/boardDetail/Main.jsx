@@ -9,7 +9,7 @@ import {
   getBoards,
   getError,
   updateBoardById,
-} from '../../hook/useQuery'
+} from '../../api/index'
 
 const BoardDetail = () => {
   const nav = useNavigate()

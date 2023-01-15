@@ -7,7 +7,7 @@ import {
   getBoards,
   getBoardWithFilter,
   getError,
-} from '../../hook/useQuery'
+} from '../../api/index'
 
 const Main = () => {
   const nav = useNavigate()
@@ -16,7 +16,7 @@ const Main = () => {
   const boardQuery = getBoards({
     // 모든 게시글 가져오기
     onSuccess: (data) => {
-      console.log('boardQuery 성공 : ', data)
+      console.log('@@@@@@@@@@@@@boardQuery 성공 : ', data)
     },
     onError: (e) => {
       console.log('boardQuery 실패 : ', e)
